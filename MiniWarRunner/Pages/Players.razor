@@ -1,0 +1,48 @@
+﻿@page "/players"
+@inject DbService DbService
+@using Data
+@using MatBlazor
+
+<style>
+  .playerCard {
+    width: 250px;
+    height: 150px;
+    margin: 5px;
+  }
+
+  .playerHeadline {
+    margin-left: 10px;
+    margin-top: 25px;
+  }
+
+  .playerArmyCount {
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+</style>
+
+<h3>Players</h3>
+
+<ol>
+  @foreach (Player p in players)
+  {
+    <li>
+      <MatCard Class="playerCard">
+        <MatCardContent>
+          <MatHeadline6 Class="playerHeadline">@p.Name</MatHeadline6>
+          <MatSubtitle2 Class="playerArmyCount">@p.Armies.Count Army Lists</MatSubtitle2>
+        </MatCardContent>
+      </MatCard>
+    </li>
+  }
+</ol>
+
+@code {
+  private List<Player> players;
+
+  protected async override void OnInitialized()
+  {
+    players = await DbService.GetPlayers();
+  }
+
+}

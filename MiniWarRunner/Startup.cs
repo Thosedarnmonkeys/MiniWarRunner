@@ -28,7 +28,10 @@ namespace MiniWarRunner
     {
       services.AddRazorPages();
       services.AddServerSideBlazor();
-      services.AddSingleton<DbService>();
+
+      string connectionString = Configuration["ConnectionString"];
+      var daoService = new SQLDAOService(connectionString);
+      services.AddSingleton<SQLDAOService>(daoService);
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

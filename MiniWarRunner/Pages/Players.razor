@@ -1,5 +1,5 @@
 ﻿@page "/players"
-@inject DbService DbService
+@inject SQLDAOService SQLService
 @using Data
 @using MatBlazor
 
@@ -42,7 +42,7 @@
 
   protected async override void OnInitialized()
   {
-    players = await DbService.GetPlayers();
+    players = await SQLService.GetPlayers();
   }
 
 }

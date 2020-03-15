@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MiniWarRunner.Data;
+using MiniWarRunner.Data.SQL;
 
 namespace MiniWarRunner
 {
@@ -29,7 +29,8 @@ namespace MiniWarRunner
       services.AddRazorPages();
       services.AddServerSideBlazor();
 
-      string connectionString = Configuration["ConnectionString"];
+      
+      string connectionString = Configuration.GetConnectionString("SQL");
       var daoService = new SQLDAOService(connectionString);
       services.AddSingleton<SQLDAOService>(daoService);
     }

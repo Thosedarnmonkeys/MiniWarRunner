@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MiniWarRunner.Data
+namespace MiniWarRunner.Data.ArmyParsers
 {
   public enum ListFormat
   {
-    BattlesScribe
+    BattlesScribeHTML,
+    BattleScribeRosz,
+    WarscrollBuilder
   }
 }

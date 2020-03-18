@@ -1,10 +1,9 @@
-﻿using MiniWarRunner.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MiniWarRunner.Data
+namespace MiniWarRunner.Data.Armies
 {
   public abstract class Army
   {
@@ -14,7 +13,7 @@ namespace MiniWarRunner.Data
 
     #region abstract properties
     public abstract List<IUnit> Units { get; }
-    public abstract GameSystem System { get; } 
+    public abstract GameSystem System { get; }
     #endregion
 
   }

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MiniWarRunner.Data
+namespace MiniWarRunner.Data.ArmyParsers
 {
-  public interface IUnit
+  public static class ArmyParserFactory
   {
-    string Name { get; }
+
   }
 }

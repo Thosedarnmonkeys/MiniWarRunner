@@ -1,4 +1,5 @@
 ﻿using MiniWarRunner.Data.Armies;
+using MiniWarRunner.Data.ArmyParsers.BattleScribeHTML.GameSystemParsers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,22 @@ namespace MiniWarRunner.Data.ArmyParsers.BattleScribeHTML
     #region public methods
     public override Army Parse(string armyString)
     {
-      throw new NotImplementedException();
+      SystemParser parser = GetParserForGameSystem(gameSystem);
+      return parser.Parse(armyString);
+    }
+    #endregion
+
+    #region private methods
+    private SystemParser GetParserForGameSystem(GameSystem gameSystem)
+    {
+      switch (gameSystem)
+      {
+        case GameSystem.Warhammer40K:
+          return new Warhammer40KParser();
+        case GameSystem.WarhammerAoS:
+        default:
+          throw new ArgumentOutOfRangeException(nameof(gameSystem));
+      }
     }
     #endregion
   }

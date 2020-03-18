@@ -9,7 +9,9 @@ namespace MiniWarRunner.Data.Armies.Warhammer40K
   {
     public int CommandPoints { get; set; }
 
-    public List<Warhammer40kDetachment> Detatchments { get; set; }
+    public string Faction { get; set; }
+
+    public List<Warhammer40kDetachment> Detatchments { get; set; } = new List<Warhammer40kDetachment>();
 
     public override List<IUnit> Units => Detatchments.SelectMany(x => x.Units.Cast<IUnit>()).ToList();
 

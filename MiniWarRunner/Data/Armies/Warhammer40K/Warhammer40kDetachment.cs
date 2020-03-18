@@ -9,6 +9,6 @@ namespace MiniWarRunner.Data.Armies.Warhammer40K
   {
     public string Name { get; set; }
     public int CommandPoints { get; set; }
-    public List<Warhammer40KUnit> Units { get; set; }
+    public List<Warhammer40KUnit> Units { get; set; } = new List<Warhammer40KUnit>();
   }
 }

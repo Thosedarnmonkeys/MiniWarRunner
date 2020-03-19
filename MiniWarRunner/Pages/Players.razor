@@ -24,9 +24,9 @@
 
 <h3>Players</h3>
 
-@if (loading)
+@if (players == null)
 {
-  <h4>LOADING</h4>
+  <MatProgressBar Indeterminate="true"/>
 }
 else
 {
@@ -47,13 +47,11 @@ else
 
 @code {
   private List<Player> players;
-  bool loading = true;
+  private bool loading;
 
-  protected async override void OnInitialized()
+  protected async override Task OnInitializedAsync()
   {
     players = await SQLService.GetPlayers();
-    loading = false;
-    this.StateHasChanged();
   }
 
 }

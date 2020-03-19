@@ -48,6 +48,8 @@ namespace MiniWarRunner.Data.SQL
     {
       using (var connection = new SqlConnection(connectionString))
       {
+        await connection.OpenAsync();
+
         using (SqlCommand command = connection.CreateCommand())
         {
           string createTablesSql = ReadResourceFile(createTablesSqlResourceKey);
@@ -55,6 +57,8 @@ namespace MiniWarRunner.Data.SQL
 
           await command.ExecuteNonQueryAsync();
         }
+
+        await connection.CloseAsync();
       }
     }
 
@@ -64,6 +68,8 @@ namespace MiniWarRunner.Data.SQL
 
       using (var connection = new SqlConnection(connectionString))
       {
+        await connection.OpenAsync();
+
         using (SqlCommand command = connection.CreateCommand())
         {
           command.CommandText = "SELECT Players.Id, " + Environment.NewLine +
@@ -118,6 +124,8 @@ namespace MiniWarRunner.Data.SQL
             }
           }
         }
+
+        await connection.CloseAsync();
       }
 
       return players.Values.ToList();

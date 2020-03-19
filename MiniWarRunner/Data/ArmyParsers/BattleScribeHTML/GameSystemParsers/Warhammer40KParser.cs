@@ -12,8 +12,8 @@ namespace MiniWarRunner.Data.ArmyParsers.BattleScribeHTML.GameSystemParsers
   public class Warhammer40KParser : SystemParser
   {
     private const string detachmentPath = @"//li[@class='force']";
-    private const string categoryPath = @"//li[@class='category']";
-    private const string unitPath = @"//li[@class='rootselection']";
+    private const string categoryPath = @"ul/li[@class='category']";
+    private const string unitPath = @"ul/li[@class='rootselection']";
 
 
     private const string cpRegex = @" \+(\d+)CP ";
@@ -65,6 +65,8 @@ namespace MiniWarRunner.Data.ArmyParsers.BattleScribeHTML.GameSystemParsers
             detachment.Units.Add(unit);
           }
         }
+
+        army.Detatchments.Add(detachment);
       }
 
       string factionsString = string.Join(", ", factions);
@@ -76,14 +78,14 @@ namespace MiniWarRunner.Data.ArmyParsers.BattleScribeHTML.GameSystemParsers
 
     private (string name, string faction, int cp) ParseDetachmentInfo(string detachmentInfo)
     {
-      int cp = 0;
+      int cp;
       var regex = new Regex(cpRegex);
       Match match = regex.Match(detachmentInfo);
-      int.TryParse(match.Value, out cp);
+      int.TryParse(match.Groups[1].Value, out cp);
 
       string cpString = $" +{cp}CP";
       int cpStartIndex = detachmentInfo.IndexOf(cpString);
-      string name = detachmentInfo.Substring(0, cpStartIndex + 1);
+      string name = detachmentInfo.Substring(0, cpStartIndex);
 
       int factionStartIndex = name.Length + cpString.Length + 2;
       string faction = detachmentInfo.Substring(factionStartIndex);
@@ -117,7 +119,7 @@ namespace MiniWarRunner.Data.ArmyParsers.BattleScribeHTML.GameSystemParsers
       int points;
       var regex = new Regex(pointsRegex);
       Match match = regex.Match(unitInfo);
-      int.TryParse(match.Value, out points);
+      int.TryParse(match.Groups[1].Value, out points);
 
       return (name, points);
     }

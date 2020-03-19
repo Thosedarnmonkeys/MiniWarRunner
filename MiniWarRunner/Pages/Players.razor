@@ -24,26 +24,35 @@
 
 <h3>Players</h3>
 
-<ol>
-  @foreach (Player p in players)
-  {
-    <li>
-      <MatCard Class="playerCard">
-        <MatCardContent>
-          <MatHeadline6 Class="playerHeadline">@p.Name</MatHeadline6>
-          <MatSubtitle2 Class="playerArmyCount">@p.Armies.Count Army Lists</MatSubtitle2>
-        </MatCardContent>
-      </MatCard>
-    </li>
-  }
-</ol>
+@if (loading)
+{
+  <h4>LOADING</h4>
+}
+else
+{
+  <ol>
+    @foreach (Player p in players)
+    {
+      <li>
+        <MatCard Class="playerCard">
+          <MatCardContent>
+            <MatHeadline6 Class="playerHeadline">@p.Name</MatHeadline6>
+            <MatSubtitle2 Class="playerArmyCount">@p.Armies.Count Army Lists</MatSubtitle2>
+          </MatCardContent>
+        </MatCard>
+      </li>
+    }
+  </ol>
+}
 
 @code {
   private List<Player> players;
+  bool loading = true;
 
   protected async override void OnInitialized()
   {
     players = await SQLService.GetPlayers();
+    loading = false;
   }
 
 }

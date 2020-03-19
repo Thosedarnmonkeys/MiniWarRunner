@@ -53,6 +53,7 @@ else
   {
     players = await SQLService.GetPlayers();
     loading = false;
+    this.StateHasChanged();
   }
 
 }

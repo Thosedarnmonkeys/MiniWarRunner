@@ -12,7 +12,8 @@ namespace MiniWarRunner.Data.Armies.Warhammer40K
     Elite,
     FastAttack,
     HeavySupport,
-    Flier,
-    LordOfWar
+    Flyer,
+    LordOfWar,
+    DedicatedTransport
   }
 }
